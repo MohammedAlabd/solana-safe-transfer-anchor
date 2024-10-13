@@ -15,12 +15,6 @@ pub mod solana_safe_transfer {
     use super::*;
 
     pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        msg!("Greetings from: {:?}", ctx.program_id);
-        msg!(
-            "ca key: {:?}",
-            ctx.accounts.confirmation_account.key().to_string(),
-        );
-
         let key = ctx.accounts.confirmation_account.key().to_string();
 
         let confirmation_account = &mut ctx.accounts.confirmation_account;
@@ -68,8 +62,6 @@ pub mod solana_safe_transfer {
         // Transfer SPL
         let confirmation_account = &ctx.accounts.confirmation_account;
 
-        msg!("ca key: {:?}", confirmation_account.key().to_string(),);
-        msg!("ca key: {:?}", ctx.accounts.from_token_account.amount);
         if confirmaction_code != confirmation_account.code {
             return Err(InvalidConfirmationCode.into());
         }
